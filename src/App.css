@@ -10,7 +10,7 @@
   gap: 10px;
 }
 #Shifra{
-  height: 70%;
+  height: 68%;
 }
 span{
   background: linear-gradient(to right, rgb(34, 221, 231), rgb(237, 4, 125));;
@@ -27,16 +27,26 @@ button{
   gap: 20px;
   font-size: 20px;
   border-radius: 20px;
-  border-radius: none;
+  border: none;
+  background: linear-gradient(to right, rgb(34, 221, 231), rgb(237, 4, 125));
+  transition: all 0.3s ease;
   background-color: rgb(79 , 224, 234);
-  box-shadow: 2px 2px 50px rgb(79 , 224, 234);
+  box-shadow: 2px 2px 20px rgb(79 , 224, 234);
+}
+button:hover {
+  background-color: rgb(0, 180, 200);
+  box-shadow: 2px 2px 20px rgb(0, 180, 200), 0 0 20px rgb(0, 255, 255);
+  transform: scale(1.05); /* Slight zoom effect */
+  cursor: pointer; /* Change pointer style on hover */
 }
 #speak{
   width: 100px;
 }
 p{
-  font-size: 1.5vmax;
+  font-size: 1.3vmax;
   color: white;
+  text-align: center;
+  padding: 0px 40px;
 }
 .response{
   display: flex;

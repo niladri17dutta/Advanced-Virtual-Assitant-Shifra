@@ -4,7 +4,34 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/x-icon" href="./src/assets/logo.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Shifra 2.0</title>
+    <title></title>
+    <script>
+      const title = " Shifra: The Advanced Virtual Assistant ";
+      let index = 0;
+      let isPaused = false;
+
+function smoothScrollTitle() {
+    if (!isPaused) {
+        document.title = title.slice(index) + title.slice(0, index);
+        index++;
+
+        if (index >= title.length) {
+            index = 0;
+            isPaused = true;
+            setTimeout(() => {
+                isPaused = false;
+                smoothScrollTitle();
+            }, 3000); // Pause for 2 seconds before restarting
+        } else {
+            setTimeout(smoothScrollTitle, 150); // Adjust scrolling speed
+        }
+    }
+}
+
+window.onload = smoothScrollTitle;
+
+      window.onload = smoothScrollTitle;
+  </script>
   </head>
   <body>
     <div id="root"></div>
