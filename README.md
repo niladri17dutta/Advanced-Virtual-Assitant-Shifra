@@ -27,7 +27,7 @@ To get started with Sifra, follow these steps:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/niladri17dutta/Gemini-Clone.git
+   git clone https://github.com/niladri17dutta/Advanced-Virtual-Assitant-Shifra.git
    ```
 2. Navigate to the project directory:
    ```bash
