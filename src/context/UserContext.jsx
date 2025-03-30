@@ -12,7 +12,7 @@ function UserContext({children}) {
     text_speak.volume=1;
     text_speak.rate=1;
     text_speak.pitch=1;
-    text_speak.lang = 'hi-GB'; // We can also use "en-US" or "en-IN" or "en-GB"
+    text_speak.lang = 'hi-GB'; // We can also use "en-US" or "en-IN" or "en-GB" (DEPENDING ON THE LANGUAGE)
     window.speechSynthesis.speak(text_speak);
   }
   async function aiResponse(prompt){
@@ -38,138 +38,47 @@ function UserContext({children}) {
   }
 
   function takeCommand(command) {
-    if (command.includes("open") && command.includes("youtube")) {
-      speak("Opening YouTube");
-      setResponse(true);
-      setPrompt("Opening YouTube...");
-      
-      setTimeout(() => {
-        window.open("https://www.youtube.com", "_blank");
-        setSpeaking(false);
-      }, 1000); // Delay opening YouTube by 1 second
-    }
-    else if (command.includes("open") && command.includes("facebook")) {
-      speak("Opening Facebook");
-      setResponse(true);
-      setPrompt("Opening Facebook...");
-      
-      setTimeout(() => {
-        window.open("https://www.facebook.com", "_blank");
-        setSpeaking(false);
-      }, 1000); // Delay opening YouTube by 1 second
-    }
-    else if (command.includes("open") && command.includes("instagram")) {
-      speak("Opening Instagram");
-      setResponse(true);
-      setPrompt("Opening Instagram...");
-      
-      setTimeout(() => {
-        window.open("https://www.instagram.com", "_blank");
-        setSpeaking(false);
-      }, 1000); // Delay opening Instagram by 1 second
-    }
-    else if (command.includes("open") && command.includes("google")) {
-      speak("Opening Google");
-      setResponse(true);
-      setPrompt("Opening Google...");
-      
-      setTimeout(() => {
-        window.open("https://www.google.com", "_blank");
-        setSpeaking(false);
-      }, 1000); // Delay opening google by 1 second
-    }
-    else if (command.includes("open") && command.includes("spotify")) {
-      speak("Opening Spotify");
-      setResponse(true);
-      setPrompt("Opening Spotify...");
-      
-      setTimeout(() => {
-        window.open("https://www.spotify.com", "_blank");
-        setSpeaking(false);
-      }, 1000); // Delay opening Spotify by 1 second
-    }
-    else if (command.includes('play music')) {
-      speak('Playing music for you.');
+    const sites = {
+      youtube: "https://www.youtube.com",
+      facebook: "https://www.facebook.com",
+      instagram: "https://www.instagram.com",
+      google: "https://www.google.com",
+      spotify: "https://www.spotify.com",
+      netflix: "https://www.netflix.com",
+      amazon: "https://www.amazon.com",
+      twitter: "https://www.twitter.com",
+      linkedin: "https://www.linkedin.com",
+      whatsapp: "https://web.whatsapp.com",
+      snapchat: "https://www.snapchat.com",
+      pinterest: "https://www.pinterest.com"
+      //  Add more sites as needed
+  };
+  
+  for (const site in sites) {
+      if (command.includes("open") && command.includes(site)) {
+          speak(`Opening ${site.charAt(0).toUpperCase() + site.slice(1)}`);
+          setResponse(true);
+          setPrompt(`Opening ${site.charAt(0).toUpperCase() + site.slice(1)}...`);
+          
+          setTimeout(() => {
+              window.open(sites[site], "_blank");
+              setSpeaking(false);
+          }, 1000);
+          return;
+      }
+  }
+  if (command.includes("play music")) {
+      speak("Playing music for you.");
       setResponse(true);
       setPrompt("Playing music...");
       
       setTimeout(() => {
-        window.open("https://www.spotify.com", "_blank");
-        setSpeaking(false);
-      }, 1000); // Delay opening Spotify by 1 second
-    }
-    else if (command.includes("open") && command.includes("netflix")) {
-      speak("Opening Netflix");
-      setResponse(true);
-      setPrompt("Opening Netflix...");
-      
-      setTimeout(() => {
-        window.open("https://www.netflix.com", "_blank");
-        setSpeaking(false);
-      }, 1000); // Delay opening Netflix by 1 second
-    }
-    else if (command.includes("open") && command.includes("amazon")) {
-      speak("Opening Amazon");
-      setResponse(true);
-      setPrompt("Opening Amazon...");
-      
-      setTimeout(() => {
-        window.open("https://www.amazon.com", "_blank");
-        setSpeaking(false);
-      }, 1000); // Delay opening Amazon by 1 second
-    }
-    else if (command.includes("open") && command.includes("twitter")) {
-      speak("Opening Twitter");
-      setResponse(true);
-      setPrompt("Opening Twitter...");
-      
-      setTimeout(() => {
-        window.open("https://www.twitter.com", "_blank");
-        setSpeaking(false);
-      }, 1000); // Delay opening Twitter by 1 second
-    }
-    else if (command.includes("open") && command.includes("linkedin")) {
-      speak("Opening LinkedIn");
-      setResponse(true);
-      setPrompt("Opening LinkedIn...");
-      
-      setTimeout(() => {
-        window.open("https://www.linkedin.com", "_blank");
-        setSpeaking(false);
-      }, 1000); // Delay opening LinkedIn by 1 second
-    }
-    else if (command.includes("open") && command.includes("whatsapp")) {
-      speak("Opening WhatsApp");
-      setResponse(true);
-      setPrompt("Opening WhatsApp...");
-      
-      setTimeout(() => {
-        window.open("https://web.whatsapp.com", "_blank");
-        setSpeaking(false);
-      }, 1000); // Delay opening WhatsApp by 1 second
-    }
-    else if (command.includes("open") && command.includes("snapchat")) {
-      speak("Opening Snapchat");
-      setResponse(true);
-      setPrompt("Opening Snapchat...");
-      
-      setTimeout(() => {
-        window.open("https://www.snapchat.com", "_blank");
-        setSpeaking(false);
-      }, 1000); // Delay opening Snapchat by 1 second
-    }
-    else if (command.includes("open") && command.includes("pinterest")) {
-      speak("Opening Pinterest");
-      setResponse(true);
-      setPrompt("Opening Pinterest...");
-      
-      setTimeout(() => {
-        window.open("https://www.pinterest.com", "_blank");
-        setSpeaking(false);
-      }, 1000); // Delay opening Pinterest by 1 second
-    } else {
-      aiResponse(command);
-    }
+          window.open("https://www.spotify.com", "_blank");
+          setSpeaking(false);
+      }, 1000);
+      return;
+  }
+  aiResponse(command);
   }
 
   let value={
