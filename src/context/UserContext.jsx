@@ -12,7 +12,7 @@ function UserContext({children}) {
     text_speak.volume=1;
     text_speak.rate=1;
     text_speak.pitch=1;
-    text_speak.lang = 'hi-us'; // We can also use "en-US" or "en-IN" or "en-GB"
+    text_speak.lang = 'hi-GB'; // We can also use "en-US" or "en-IN" or "en-GB"
     window.speechSynthesis.speak(text_speak);
   }
   async function aiResponse(prompt){
