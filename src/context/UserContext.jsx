@@ -12,20 +12,30 @@ function UserContext({children}) {
     text_speak.volume=1;
     text_speak.rate=1;
     text_speak.pitch=1;
-    text_speak.lang = 'hi-GB'; // We can also use "en-US" or "en-IN" or "en-GB" (DEPENDING ON THE LANGUAGE)
+    text_speak.lang = 'en-GB'; // We can also use "en-US" or "en-IN" or "en-GB" or "or "hi-GB" (DEPENDING ON THE LANGUAGE)
     window.speechSynthesis.speak(text_speak);
   }
-  async function aiResponse(prompt){
-    let text = await run(prompt)
-    let newText=text.split("**")&&text.split("*")&&text.replace("google","Niladri Dutta")&&text.replace("Google","Niladri");
-    console.log(newText);
-    setPrompt(newText.split('.').slice(0, 2).join('.'));
-    speak(newText.split('.').slice(0, 2).join('.'));
+  async function aiResponse(prompt) {
+    let text = await run(prompt);
+
+    // Clean up the text:
+    let cleanedText = text
+      .replace(/\*\*/g, '')    // remove all double asterisks
+      .replace(/\*/g, '')      // remove all single asterisks
+      .replace(/google/gi, 'Niladri Dutta'); // replace "google" and "Google" ignoring case
+
+    console.log(cleanedText);
+
+    let speakText = cleanedText.split('.').slice(0, 2).join('.'); // take only the first two sentences
+    setPrompt(speakText);
+    speak(speakText);
+
     setResponse(true);
-    setTimeout(()=>{
+    setTimeout(() => {
       setSpeaking(false);
-    },15000)
-  }
+    }, 15000);
+}
+
 
   let speechRecognition=window.SpeechRecognition || window.webkitSpeechRecognition;
   let recognition=new speechRecognition();
